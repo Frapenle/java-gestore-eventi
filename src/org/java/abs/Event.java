@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event {
 	private String title;
-	private LocalDate date;
+	protected LocalDate date;
 	private int maxSeats;
 	private int reservedSeats;
 	
@@ -15,7 +15,12 @@ public class Event {
 		setMaxSeats(maxSeats);
 		this.reservedSeats = 0;
 	}
-//	title
+	public Event(String title, LocalDate date) throws Exception {
+		// TODO Auto-generated constructor stub
+		setTitle(title);
+		setDate(date);
+	}
+	//	title
 	public String getTitle() {
 		return title;
 	}
@@ -50,7 +55,7 @@ public class Event {
 		return reservedSeats;
 	}
 //	book
-	public void book() throws Exception {
+	public int book(int seats) throws Exception {
 		if (date.isBefore(LocalDate.now())) {
 			throw new Exception ("Non puoi prenotare un evento già passato.");
 		}
@@ -58,23 +63,23 @@ public class Event {
 		if (reservedSeats >= maxSeats) {
 			throw new Exception("I posti sono esauriti.");
 		}
-		reservedSeats++;
+		return reservedSeats = reservedSeats + seats;
 	}
 //	cancel
-	public void cancel() throws Exception{
+	public int cancel(int seats) throws Exception{
 		if (date.isBefore(LocalDate.now())) {
 			throw new Exception("Non puoi disdire un evento passato.");
 		}
 		if(reservedSeats <= 0) {
 			throw new Exception("Errore! Impossibile disdire. Non son presenti prenotazioni.");
 		}
-		reservedSeats--;
+		return reservedSeats = reservedSeats - seats;
 	}
 	@Override
 	public String toString() {
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 	    String formattedDate = date.format(formatter).toUpperCase();
-	    return "Data: " + formattedDate + " - " + "Nome: " + title;
+	    return "Data: " + formattedDate + " - " + "Nome: " + getTitle();
 	}
 	
 }

@@ -1,14 +1,23 @@
 package org.java;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.java.abs.Event;
+import org.java.obj.Concerto;
+import org.java.obj.ProgramEvent;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		Concerto concerto = new Concerto("nome concerto", LocalDate.of(2030, 4, 30), 500, LocalTime.of(23, 0), new BigDecimal(23.50));
+		System.out.println(concerto);
+		System.out.println("------------------");
+		
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Inserisci il nome dell'evento: ");
@@ -36,9 +45,7 @@ public class Main {
                 int reservedSeats = sc.nextInt();
                 sc.nextLine();
                 try {
-                    for (int i = 0; i < reservedSeats; i++) {
-                        evento.book();
-                    }
+                        evento.book(reservedSeats);
                 } catch (Exception e) {
                     System.err.println("Errore durante la prenotazione: " + e.getMessage());
                 } 
@@ -56,9 +63,7 @@ public class Main {
             	sc.nextLine();
             	
             		try {
-            			for (int i = 0; i < cancelNumber; i++) {
-            				evento.cancel();            				
-            			}
+            				evento.cancel(cancelNumber);            				
             		} catch (Exception e) {
             			System.err.println("Errore: " + e.getMessage());
             		}
@@ -71,7 +76,19 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Errore: " + e.getMessage());
         }
+        sc.close();
         
+//      Test Program event
+        System.out.println("--------------------");
+        ProgramEvent pe = new ProgramEvent("Programma \n");
+        Event event1 = new Event("Evento uno", LocalDate.of(2030, 4, 30));
+        Event event2 = new Event("Evento due", LocalDate.of(2029, 4, 30));
+        Event event3 = new Event("Evento tre", LocalDate.of(2030, 5, 10));
+        pe.addEvent(event1);
+        pe.addEvent(event2);
+        pe.addEvent(event3);
+        System.out.println("Numero di eventi: " + pe.getNumberOfEvents());
+        System.out.println("Ordina per data: " + pe.getEventsSortByDate());
 	}
 
 }

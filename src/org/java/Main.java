@@ -14,7 +14,7 @@ import org.java.obj.ProgramEvent;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		Concerto concerto = new Concerto("nome concerto", LocalDate.of(2030, 4, 30), 500, LocalTime.of(23, 0), new BigDecimal(23.50));
+		Concerto concerto = new Concerto("nome concerto", LocalDate.of(2030, 4, 30), 500, LocalTime.of(23, 0), new BigDecimal(23.58234324234));
 		System.out.println(concerto);
 		System.out.println("------------------");
 		
@@ -84,9 +84,12 @@ public class Main {
         Event event1 = new Event("Evento uno", LocalDate.of(2030, 4, 30));
         Event event2 = new Event("Evento due", LocalDate.of(2029, 4, 30));
         Event event3 = new Event("Evento tre", LocalDate.of(2030, 5, 10));
+        
         pe.addEvent(event1);
         pe.addEvent(event2);
         pe.addEvent(event3);
+
+//        pe.clearEvents();
         System.out.println("Numero di eventi: " + pe.getNumberOfEvents());
         System.out.println("Ordina per data: " + pe.getEventsSortByDate());
 	}

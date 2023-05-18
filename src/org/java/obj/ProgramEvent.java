@@ -1,7 +1,7 @@
 package org.java.obj;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -54,12 +54,19 @@ public class ProgramEvent {
             }
 		});
 		for (Event event : events) {
-            printEvents = printEvents + event.toString() + "\n";
+            printEvents = printEvents + "event.toString " + event.toString() + "\n";
             System.out.println("---------------");
         }
         return printEvents;
 	}
-	
-	
-
+//	get events byDate
+	public List<Event> getEventiByData(LocalDate date) {
+			List<Event> result = new ArrayList<>();		
+			for (Event ev : getEvents()) {
+				if (ev.getDate().isEqual(date)) {
+					result.add(ev);
+				}
+			}
+			return result;
+		}
 }
